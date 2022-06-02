@@ -1,0 +1,15 @@
+Pacman - Pagent
+Gliwice
+Mag Dz
+11
+Dom Olko 3 5 
+Adam King 0 2 
+Magda P 3 7 
+Maja Polak 3 1 
+Olga Goz 3 7 
+Pola Kok 1 8 
+Basia Kokos 3 9 
+Zosia Lokk 3 10 
+- - 0 7 
+k k 2 10 
+Gosia Pok 3 9 
