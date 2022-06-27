@@ -3,13 +3,13 @@ import 'package:workoutapp/Widgets/exercise_item.dart';
 import 'package:workoutapp/models/exercise_model.dart';
 
 class FavoritesScreen extends StatelessWidget {
-  final List<Exercise> favoriteMeals;
+  final List<Exercise> favorite;
 
-  FavoritesScreen(this.favoriteMeals);
+  FavoritesScreen(this.favorite);
 
   @override
   Widget build(BuildContext context) {
-    if (favoriteMeals.isEmpty) {
+    if (favorite.isEmpty) {
       return Scaffold(
         body: Center(
           child: Text('You have no favorites yet!'),
@@ -19,15 +19,15 @@ class FavoritesScreen extends StatelessWidget {
       return ListView.builder(
         itemBuilder: (ctx, index) {
           return ExerciseItem(
-            id: favoriteMeals[index].id,
-            title: favoriteMeals[index].title,
-            imageUrl: favoriteMeals[index].image,
-            duration: favoriteMeals[index].duration,
-            workoutArea: favoriteMeals[index].workoutArea,
-            complexity: favoriteMeals[index].complexity,
+            id: favorite[index].id,
+            title: favorite[index].title,
+            imageUrl: favorite[index].image,
+            duration: favorite[index].duration,
+            workoutArea: favorite[index].workoutArea,
+            complexity: favorite[index].complexity,
           );
         },
-        itemCount: favoriteMeals.length,
+        itemCount: favorite.length,
       );
     }
   }

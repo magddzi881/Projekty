@@ -5,9 +5,9 @@ import '../Widgets/exercise_item.dart';
 class CategoryExercisesScreen extends StatefulWidget {
   static const routeName = '/category-ex';
 
-  final List<Exercise> availableMeals;
+  final List<Exercise> available;
 
-  CategoryExercisesScreen(this.availableMeals);
+  CategoryExercisesScreen(this.available);
 
   @override
   CategoryExercisesScreenState createState() => CategoryExercisesScreenState();
@@ -15,7 +15,7 @@ class CategoryExercisesScreen extends StatefulWidget {
 
 class CategoryExercisesScreenState extends State<CategoryExercisesScreen> {
   String? categoryTitle;
-  List<Exercise>? displayedMeals;
+  List<Exercise>? displayed;
   var _loadedInitData = false;
 
   @override
@@ -31,17 +31,17 @@ class CategoryExercisesScreenState extends State<CategoryExercisesScreen> {
           ModalRoute.of(context)!.settings.arguments as Map<String, String>;
       categoryTitle = routeArgs['title'];
       final categoryId = routeArgs['id'];
-      displayedMeals = widget.availableMeals.where((meal) {
-        return meal.categories.contains(categoryId);
+      displayed = widget.available.where((ex) {
+        return ex.categories.contains(categoryId);
       }).toList();
       _loadedInitData = true;
     }
     super.didChangeDependencies();
   }
 
-  void _removeMeal(String mealId) {
+  void _removeMeal(String exId) {
     setState(() {
-      displayedMeals?.removeWhere((meal) => meal.id == mealId);
+      displayed?.removeWhere((ex) => ex.id == exId);
     });
   }
 
@@ -54,15 +54,15 @@ class CategoryExercisesScreenState extends State<CategoryExercisesScreen> {
       body: ListView.builder(
         itemBuilder: (ctx, index) {
           return ExerciseItem(
-            id: displayedMeals![index].id,
-            title: displayedMeals![index].title,
-            imageUrl: displayedMeals![index].image,
-            duration: displayedMeals![index].duration,
-            workoutArea: displayedMeals![index].workoutArea,
-            complexity: displayedMeals![index].complexity,
+            id: displayed![index].id,
+            title: displayed![index].title,
+            imageUrl: displayed![index].image,
+            duration: displayed![index].duration,
+            workoutArea: displayed![index].workoutArea,
+            complexity: displayed![index].complexity,
           );
         },
-        itemCount: displayedMeals!.length,
+        itemCount: displayed!.length,
       ),
     );
   }

@@ -37,17 +37,17 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _filters = filterData;
 
-      avaliableExercises = listOfExercises.where((meal) {
-        if (_filters['forBeginners'] as bool && !meal.isForBeginners) {
+      avaliableExercises = listOfExercises.where((ex) {
+        if (_filters['forBeginners'] as bool && !ex.isForBeginners) {
           return false;
         }
-        if (_filters['easy'] as bool && !meal.isEasy) {
+        if (_filters['easy'] as bool && !ex.isEasy) {
           return false;
         }
-        if (_filters['advanced'] as bool && !meal.isAdvanced) {
+        if (_filters['advanced'] as bool && !ex.isAdvanced) {
           return false;
         }
-        if (_filters['hard'] as bool && !meal.isHard) {
+        if (_filters['hard'] as bool && !ex.isHard) {
           return false;
         }
         return true;
@@ -56,26 +56,25 @@ class _MyAppState extends State<MyApp> {
   }
 
   //const MyApp({Key? key}) : super(key: key);
-  List<Exercise> _favoriteMeals = [];
+  List<Exercise> _favoriteEx = [];
 
-  void _toggleFavorite(String mealId) {
-    final existingIndex =
-        _favoriteMeals.indexWhere((meal) => meal.id == mealId);
+  void _toggleFavorite(String exId) {
+    final existingIndex = _favoriteEx.indexWhere((ex) => ex.id == exId);
     if (existingIndex >= 0) {
       setState(() {
-        _favoriteMeals.removeAt(existingIndex);
+        _favoriteEx.removeAt(existingIndex);
       });
     } else {
       setState(() {
-        _favoriteMeals.add(
-          listOfExercises.firstWhere((meal) => meal.id == mealId),
+        _favoriteEx.add(
+          listOfExercises.firstWhere((ex) => ex.id == exId),
         );
       });
     }
   }
 
-  bool _isMealFavorite(String id) {
-    return _favoriteMeals.any((meal) => meal.id == id);
+  bool _isFavorite(String id) {
+    return _favoriteEx.any((ex) => ex.id == id);
   }
 
   @override
@@ -91,10 +90,10 @@ class _MyAppState extends State<MyApp> {
       ),
       initialRoute: '/',
       routes: {
-        '/': (ctx) => TabsScreen(_favoriteMeals),
+        '/': (ctx) => TabsScreen(_favoriteEx),
         '/category-ex': (ctx) => CategoryExercisesScreen(avaliableExercises),
-        '/detail': (ctx) => ExDetailScreen(_toggleFavorite, _isMealFavorite),
-        '/favorites': (ctx) => FavoritesScreen(_favoriteMeals),
+        '/detail': (ctx) => ExDetailScreen(_toggleFavorite, _isFavorite),
+        '/favorites': (ctx) => FavoritesScreen(_favoriteEx),
         FiltersScreen.routeName: (ctx) => FiltersScreen(_filters, _setFilters),
         '/notes': (ctx) => NotesScreen(),
         //NoteDetail.routeName: (ctx) => NoteDetail(),

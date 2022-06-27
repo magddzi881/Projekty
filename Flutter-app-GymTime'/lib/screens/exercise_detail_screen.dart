@@ -39,12 +39,11 @@ class ExDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mealId = ModalRoute.of(context)?.settings.arguments as String;
-    final selectedMeal =
-        listOfExercises.firstWhere((meal) => meal.id == mealId);
+    final exId = ModalRoute.of(context)?.settings.arguments as String;
+    final selectedEx = listOfExercises.firstWhere((ex) => ex.id == exId);
     return Scaffold(
       appBar: AppBar(
-        title: Text('${selectedMeal.title}'),
+        title: Text('${selectedEx.title}'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -53,7 +52,7 @@ class ExDetailScreen extends StatelessWidget {
               height: 300,
               width: double.infinity,
               child: Image.network(
-                selectedMeal.image,
+                selectedEx.image,
                 fit: BoxFit.cover,
               ),
             ),
@@ -61,7 +60,7 @@ class ExDetailScreen extends StatelessWidget {
             Card(
                 elevation: 7,
                 child: Text(
-                  selectedMeal.preparation.first,
+                  selectedEx.preparation.first,
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 15),
                 )),
@@ -75,13 +74,13 @@ class ExDetailScreen extends StatelessWidget {
                         child: Text('# ${(index + 1)}'),
                       ),
                       title: Text(
-                        selectedMeal.steps[index],
+                        selectedEx.steps[index],
                       ),
                     ),
                     Divider()
                   ],
                 ),
-                itemCount: selectedMeal.steps.length,
+                itemCount: selectedEx.steps.length,
               ),
             ),
           ],
@@ -89,9 +88,9 @@ class ExDetailScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(
-          isFavorite(mealId) ? Icons.star : Icons.star_border,
+          isFavorite(exId) ? Icons.star : Icons.star_border,
         ),
-        onPressed: () => toggleFavorite(mealId),
+        onPressed: () => toggleFavorite(exId),
       ),
     );
   }

@@ -39,7 +39,7 @@ class ExerciseItem extends StatelessWidget {
     }
   }
 
-  void selectMeal(BuildContext context) {
+  void selectEx(BuildContext context) {
     Navigator.of(context)
         .pushNamed(
       ExDetailScreen.routeName,
@@ -55,7 +55,7 @@ class ExerciseItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => selectMeal(context),
+      onTap: () => selectEx(context),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
